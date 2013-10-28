@@ -2,20 +2,26 @@
 setopt autocd extendedglob nomatch
 # End of lines configured by zsh-newuser-install
 
+# Share history
+setopt hist_ignore_dups share_history inc_append_history extended_history
+
+# Colorize stuff
 autoload -U colors && colors
 PROMPT="%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[cyan]%}%m %{$fg[red]%}%1~ %{$reset_color%}%# "
+export CLICOLOR="YES"
 
-CLICOLOR="YES";                        export CLICOLOR
+if [ `uname` == "Linux" ] ; then
+    alias ls='ls -lh --group-directories-first --color=auto'
+else
+    alias ls='ls -lGh'
+fi
 
-[ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
-
-[ -e "$DIR_COLORS" ] || DIR_COLORS=""
-
-eval "`dircolors -b $DIR_COLORS`"
-alias ls='ls --color=auto'
-
-alias ls='ls -lh --color=auto --group-directories-first'
 alias df='df -h'
+alias mkdir='mkdir -p'
+alias today='date +%Y.%m.%d'
 
-EDITOR=/usr/bin/emacs
-export EDITOR
+export TERM='xterm-256color'
+
+if [ -x `which emacs` ] ; then
+    export EDITOR=`which emacs`
+fi
