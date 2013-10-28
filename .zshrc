@@ -10,7 +10,7 @@ autoload -U colors && colors
 PROMPT="%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[cyan]%}%m %{$fg[red]%}%1~ %{$reset_color%}%# "
 export CLICOLOR="YES"
 
-if [ `uname` == "Linux" ] ; then
+if [[ $(uname) == 'Linux' ]] ; then
     alias ls='ls -lh --group-directories-first --color=auto'
 else
     alias ls='ls -lGh'
