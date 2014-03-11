@@ -25,3 +25,12 @@ export TERM='xterm-256color'
 if [ -x `which emacs` ] ; then
     export EDITOR=`which emacs`
 fi
+
+# ctrl-left ctrl-right word zooms
+bindkey '^[[D' emacs-backward-word
+bindkey '^[[C' emacs-forward-word
+
+# home, end, deletes
+bindkey '^[[3~' delete-char
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
