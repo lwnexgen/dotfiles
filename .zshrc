@@ -4,8 +4,8 @@ setopt autocd extendedglob nomatch
 
 # History stuff
 HISTFILE=~/.histfile
-SAVEHIST=512
-setopt sharehistory incappendhistory histreduceblanks histexpiredupsfirst
+SAVEHIST=2048
+setopt sharehistory histreduceblanks histexpiredupsfirst
 
 # autoloads
 autoload -Uz compinit && compinit
@@ -15,7 +15,8 @@ autoload -U colors && colors
 [ -e "`which colordiff`" ] && alias diff="colordiff"
 
 # Path mods
-export PATH=$HOME/.bin:$PATH
+export PATH=$HOME/.bin:/usr/local/lib/nvidia/cuda-12.3/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib/nvidia/cuda-12.3/lib64:$LD_LIBRARY_PATH
 
 # default emacs editor
 export EDITOR=emacs
@@ -42,3 +43,11 @@ bindkey '^[OD' backward-word
 bindkey '^[[1;3C' forward-char
 bindkey '^[[1;3D' backward-char
 bindkey '^[[3~' delete-char
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export HF_HOME="/mnt/megapenthes/Development/huggingface"
+
+mount | grep -q 'nvidia' || sudo mount -t auto /dev/zvol/proteus/cuda /usr/local/lib/nvidia
